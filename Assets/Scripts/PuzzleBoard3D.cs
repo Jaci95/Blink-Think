@@ -45,6 +45,10 @@ public class PuzzleBoard3D : MonoBehaviour
         if (Mouse.current == null || mainCamera == null)
             return;
 
+        // ❌ Keine Eingabe wenn pausiert
+        if (PauseManager.isPaused)
+            return;
+
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             TrySelectPiece();
@@ -70,6 +74,10 @@ public class PuzzleBoard3D : MonoBehaviour
     public void SelectPiece(PuzzlePiece3D piece)
     {
         if (piece == null) return;
+
+        // ❌ Sicherheitshalber auch hier blockieren
+        if (PauseManager.isPaused)
+            return;
 
         // richtige Teile dürfen nicht mehr bewegt werden
         if (piece.IsCorrect)
@@ -101,16 +109,6 @@ public class PuzzleBoard3D : MonoBehaviour
             }
 
             firstSelected = null;
-            return;
-        }
-
-        // zweites Teil ist auch gesperrt -> nichts machen
-        if (piece.IsCorrect)
-        {
-            if (logClicks)
-            {
-                Debug.Log(piece.name + " ist gesperrt und kann nicht getauscht werden.");
-            }
             return;
         }
 
