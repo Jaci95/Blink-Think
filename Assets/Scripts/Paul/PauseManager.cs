@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     public static bool isPaused;
 
     public InputAction cancel;
+    public GameObject VictoryScreen;
 
     public void Start()
     {
@@ -55,5 +56,10 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         PauseMenuUI.SetActive(false);
+    }
+    public void Victory()
+    {
+        VictoryScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
