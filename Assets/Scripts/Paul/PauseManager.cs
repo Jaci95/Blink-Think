@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class PauseManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PauseManager : MonoBehaviour
 
     public InputAction cancel;
     public GameObject VictoryScreen;
+    [SerializeField] public GameObject VisionCanvas; // HIER NEU
 
     public void Start()
     {
@@ -58,8 +60,21 @@ public class PauseManager : MonoBehaviour
         PauseMenuUI.SetActive(false);
     }
     public void Victory()
-    {
-        VictoryScreen.SetActive(true);
+
+        {
+            VictoryScreen.SetActive(true);
+
+            if (VisionCanvas != null)
+            {
+                Debug.Log("VisionCanvas wird ausgeblendet: " + VisionCanvas.name);
+                VisionCanvas.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("VisionCanvas ist NICHT zugewiesen!");
+            }
+
         Time.timeScale = 0f;
     }
+  
 }
