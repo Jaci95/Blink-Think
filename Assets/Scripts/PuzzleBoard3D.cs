@@ -20,6 +20,9 @@ public class PuzzleBoard3D : MonoBehaviour
     private PuzzlePiece3D firstSelected;
     private PuzzlePiece3D secondSelected;
 
+    //für victory screen
+    private PauseManager _PauseManager;
+
     private void Start()
     {
         if (mainCamera == null)
@@ -38,6 +41,7 @@ public class PuzzleBoard3D : MonoBehaviour
             piece.UpdateLabel();
             piece.UpdateVisual();
         }
+        _PauseManager = FindFirstObjectByType<PauseManager>();
     }
 
     private void Update()
@@ -178,8 +182,16 @@ public class PuzzleBoard3D : MonoBehaviour
                 return;
             }
         }
-
+        
         Debug.Log("Puzzle gelöst!");
+         if (_PauseManager != null)
+    {
+        _PauseManager.Victory();
+    }
+    else
+    {
+        Debug.LogError("Kein PauseManager in der Szene gefunden.");
+    }
     }
 
     private void ShufflePieces()
