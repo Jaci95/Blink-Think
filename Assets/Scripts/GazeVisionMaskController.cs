@@ -27,9 +27,7 @@ public class GazeVisionMaskController : MonoBehaviour
             return;
         }
 
-        maskMaterial.SetFloat("_Radius", radius);
-        maskMaterial.SetFloat("_Softness", softness);
-        maskMaterial.SetVector("_HoleCenter", new Vector4(currentUV.x, currentUV.y, 0f, 0f));
+        ApplyMaskProperties();
     }
 
     private void Update()
@@ -63,9 +61,13 @@ public class GazeVisionMaskController : MonoBehaviour
         float t = 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime);
         currentUV = Vector2.Lerp(currentUV, targetUV, t);
 
-        maskMaterial.SetFloat("_Radius", radius);
-        maskMaterial.SetFloat("_Softness", softness);
-        maskMaterial.SetVector("_HoleCenter", new Vector4(currentUV.x, currentUV.y, 0f, 0f));
+        ApplyMaskProperties();
+    }
+
+    public void SetRadius(float newRadius)
+    {
+        radius = Mathf.Max(0f, newRadius);
+        ApplyMaskProperties();
     }
 
     private bool TryGetGazeUV(out Vector2 uv)
@@ -86,5 +88,15 @@ public class GazeVisionMaskController : MonoBehaviour
         uv = gaze;
         Debug.Log("[VisionMask] Tobii gaze: " + gaze);
         return true;
+    }
+
+    private void ApplyMaskProperties()
+    {
+        if (maskMaterial == null)
+            return;
+
+        maskMaterial.SetFloat("_Radius", radius);
+        maskMaterial.SetFloat("_Softness", softness);
+        maskMaterial.SetVector("_HoleCenter", new Vector4(currentUV.x, currentUV.y, 0f, 0f));
     }
 }

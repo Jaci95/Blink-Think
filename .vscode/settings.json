@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "EMP_Blink_Think.slnx"
+    "dotnet.defaultSolution": "Blink-Think.slnx"
 }
