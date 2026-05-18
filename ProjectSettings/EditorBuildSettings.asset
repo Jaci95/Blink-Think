@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_Paul/StartMenu.unity
     guid: 7c43dcfff442014438fd5c5b19244b80
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/Puzzle_easy.unity
     guid: 980aae3c2c0f72840b87f05039e7fb40
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
